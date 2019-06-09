@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import logo from "./logo.svg";
 import "./App.css";
+
+import { BaseProvider, LightTheme } from "baseui";
+
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import Room from "./pages/Room";
 
 import { fetchRooms } from "./actions/rooms";
 
@@ -11,22 +17,15 @@ function App(props) {
   });
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BaseProvider theme={LightTheme}>
+      <BrowserRouter>
+        <Header />
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/room/:id" component={Room} exact />
+        </Switch>
+      </BrowserRouter>
+    </BaseProvider>
   );
 }
 function mapStateToProps(state) {
