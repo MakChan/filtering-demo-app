@@ -26,7 +26,6 @@ function rooms(
 
     case GET_ROOMS_SUCCESS:
       const roomsById = {};
-      console.log(payload)
 
       payload.rooms.map(room => {
         roomsById[room.id] = room;

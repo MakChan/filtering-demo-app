@@ -37,7 +37,6 @@ export function fetchRoom(roomId) {
 
     const state = getState();
     const room = state.rooms.rooms.find(item => item.id === roomId);
-    console.log("room",room)
 
     if (!room)
       firebase.room(roomId).then(snapshot => {
