@@ -1,12 +1,17 @@
 import {
   GET_ROOMS_REQUEST,
   GET_ROOMS_SUCCESS,
-  GET_ROOMS_ERROR
+  GET_ROOMS_ERROR,
+  GET_ROOM_REQUEST,
+  GET_ROOM_SUCCESS,
+  GET_ROOM_ERROR
 } from "../constants/actionTypes";
 
 function rooms(
   state = {
     isFetching: true,
+    isRoomFetching: true,
+    roomsById: {},
     rooms: []
   },
   action
@@ -18,18 +23,40 @@ function rooms(
         ...state,
         isFetching: true
       };
+
     case GET_ROOMS_SUCCESS:
+      const roomsById = {};
+      console.log(payload)
+
+      payload.rooms.map(room => {
+        roomsById[room.id] = room;
+      });
+
       return {
         ...state,
         isFetching: false,
-        GET_ROOMS_ERROR: payload.rooms
+        roomsById,
+        rooms: payload.rooms
       };
 
     case GET_ROOMS_ERROR:
       return {
         ...state,
         isFetching: false,
-        GET_ROOMS_ERROR: []
+        rooms: []
+      };
+
+    case GET_ROOM_REQUEST:
+      return {
+        ...state,
+        isRoomFetching: true
+      };
+
+    case GET_ROOM_SUCCESS:
+      return {
+        ...state,
+        isRoomFetching: false,
+        roomsById: { ...state.roomsById, [payload.room.id]: payload.room }
       };
 
     default:

@@ -14,5 +14,6 @@ export class Firebase {
     this.db = app.database();
   }
 
-  rooms = () => this.db.ref("rooms").once("value");
+  room = roomId => this.db.ref("/rooms/" + roomId).once("value");
+  rooms = () => this.db.ref("/rooms").once("value");
 }

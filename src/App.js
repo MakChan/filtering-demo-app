@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { connect } from "react-redux";
 import "./App.css";
 
 import { BaseProvider, LightTheme } from "baseui";
@@ -9,13 +8,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import Room from "./pages/Room";
 
-import { fetchRooms } from "./actions/rooms";
-
-function App(props) {
-  useEffect(() => {
-    props.dispatch(fetchRooms());
-  });
-
+function App() {
   return (
     <BaseProvider theme={LightTheme}>
       <BrowserRouter>
@@ -28,10 +21,5 @@ function App(props) {
     </BaseProvider>
   );
 }
-function mapStateToProps(state) {
-  return {
-    rooms: state.rooms.rooms
-  };
-}
 
-export default connect(mapStateToProps)(App);
+export default App;
