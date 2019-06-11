@@ -1,8 +1,9 @@
 import React from "react";
 import { Card } from "baseui/card";
 
-const StyledCard = ({ children, style }) => (
+const StyledCard = ({ children, style, ...rest }) => (
   <Card
+    {...rest}
     overrides={{
       Root: {
         style: ({ $theme }) => ({
@@ -14,6 +15,14 @@ const StyledCard = ({ children, style }) => (
           borderBottomLeftRadius: $theme.borders.radius200,
           boxShadow: "0 0 40px rgba(0,0,0,.08)",
           ...style
+        })
+      },
+      Contents: {
+        style: () => ({
+          marginTop: "20px",
+          marginBottom: "20px",
+          marginLeft: "20px",
+          marginRight: "20px"
         })
       }
     }}

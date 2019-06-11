@@ -4,7 +4,8 @@ import {
   GET_ROOMS_ERROR,
   GET_ROOM_REQUEST,
   GET_ROOM_SUCCESS,
-  GET_ROOM_ERROR
+  GET_ROOM_ERROR,
+  SET_FILTERS
 } from "../constants/actionTypes";
 
 function rooms(
@@ -12,7 +13,22 @@ function rooms(
     isFetching: true,
     isRoomFetching: true,
     roomsById: {},
-    rooms: []
+    rooms: [],
+    filters: {
+      priceRange: [0, 10000],
+      areaRange: [0, 3000],
+      ratingRange: [0, 5],
+      cities: {
+        Delhi: true,
+        Noida: true,
+        Gurgaon: true
+      },
+      occupancies: {
+        Single: true,
+        Double: true,
+        Triple: true
+      }
+    }
   },
   action
 ) {
@@ -58,6 +74,11 @@ function rooms(
         roomsById: { ...state.roomsById, [payload.room.id]: payload.room }
       };
 
+    case SET_FILTERS:
+      return {
+        ...state,
+        filters: payload
+      };
     default:
       return state;
   }

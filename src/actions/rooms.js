@@ -50,7 +50,7 @@ export function fetchRoom(roomId) {
 
         dispatch({
           type: GET_ROOM_SUCCESS,
-          payload: { room: res.room }
+          payload: { room: res }
         });
       });
   };
